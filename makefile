@@ -14,7 +14,8 @@ PREFIX := /usr
 BINDIR := /bin
 INSPATH := $(DESTDIR)$(PREFIX)$(BINDIR)
 
-.PHONY : all
+.PHONY : all install uninstall clean
+
 all : $(OUTFILE)
 
 $(OUTFILE) : $(OBJECTS)
@@ -25,15 +26,12 @@ $(OUTFILE) : $(OBJECTS)
 $(BUILDPATH)/%.o : $(SRCPATH)/%.c
 	$(CC) $(CFLAGS) -o $@ $^
 
-.PHONY : install
 install : $(OUTFILE)
-	install -Dm755 "$(OUTFILE)" "$(INSPATH)/$(OUTFILE)"
+	install -Dm755 "$^" "$(INSPATH)/$^"
 
-.PHONY : uninstall
 uninstall :
 	rm "$(INSPATH)/$(OUTFILE)"
 
-.PHONY : clean
 clean :
 	rm $(BUILDPATH)/*
 	rm $(OUTFILE)
