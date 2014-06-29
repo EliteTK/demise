@@ -9,6 +9,7 @@
 #include <string.h>
 #include <sys/socket.h>
 #include <sys/types.h>
+#include <unistd.h>
 
 static char **dns_servers;
 static int dns_servers_count;
@@ -48,6 +49,8 @@ Connection *c_connect(char *address, int port, enum c_error *err)
 
 void c_disconnect(Connection *connection)
 {
+        close(connection->socket);
+        free(connection);
 }
 
 int c_send(Connection *connection, char *message)
