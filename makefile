@@ -1,10 +1,10 @@
 CFLAGS := -O2 -c #-Wall -Werror
-LDFLAGS := -lglut -lGL -lGLU -lm
+LDFLAGS := -lresolv
 
 SRCPATH := ./src
 BUILDPATH := ./build
 
-SOURCES :=
+SOURCES := connection.c main.c
 OBJECTS := $(addprefix $(BUILDPATH)/,$(SOURCES:%.c=%.o))
 SOURCES := $(addprefix $(SRCPATH)/,$(SOURCES))
 
