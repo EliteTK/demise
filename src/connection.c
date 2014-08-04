@@ -1,6 +1,5 @@
 #include "connection.h"
 #include <arpa/inet.h>
-#include <ctype.h>
 #include <netdb.h>
 #include <netinet/in.h>
 #include <stdbool.h>
@@ -44,6 +43,8 @@ Connection *c_connect(char *address, int port, enum c_error *err)
         Connection *connection = malloc(sizeof(Connection));
 
         connection->socket = s;
+
+        *err = SUCCESS;
         return connection;
 }
 
@@ -63,11 +64,7 @@ int c_recv(Connection *connection, char *message, int length)
         return recv(connection->socket, message, length, 0);
 }
 
-///////////////////////
-// Internal statics: //
-///////////////////////
-
-static bool to_in_addr(struct in_addr *output, char *source)
+static bool parse(struct in_addr *output, char *source)
 {
         if (inet_pton(AF_INET, source, output))
                 return false;

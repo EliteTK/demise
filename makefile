@@ -8,7 +8,7 @@ SOURCES := connection.c main.c
 OBJECTS := $(addprefix $(BUILDPATH)/,$(SOURCES:%.c=%.o))
 SOURCES := $(addprefix $(SRCPATH)/,$(SOURCES))
 
-OUTFILE := minCeraft
+OUTFILE := demise
 
 PREFIX := /usr
 BINDIR := /bin
@@ -21,7 +21,6 @@ all : $(OUTFILE)
 $(OUTFILE) : $(OBJECTS)
 	$(CC) $(LDFLAGS) -o $@ $^
 	strip $@
-
 
 $(BUILDPATH)/%.o : $(SRCPATH)/%.c
 	$(CC) $(CFLAGS) -o $@ $^
